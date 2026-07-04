@@ -1,0 +1,22 @@
+name: Docker Build CI
+
+# This pipeline runs automatically on every code push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-image:
+    # Uses a free Linux virtual machine provided by GitHub
+    runs-on: ubuntu-latest 
+
+    steps:
+      # Clones your repository code onto the virtual Linux machine
+      - name: Checkout Code
+        uses: actions/checkout@v4 
+
+      # Automatically builds your Docker container using the Dockerfile
+      - name: Build the Docker Image
+        run: |
+          docker build -t my-first-app:latest .
+          echo "Success: Docker container built without any errors!"
